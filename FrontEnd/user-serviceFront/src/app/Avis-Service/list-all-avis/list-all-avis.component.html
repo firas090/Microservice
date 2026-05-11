@@ -1,0 +1,71 @@
+<div class="container my-5">
+    <h2 class="text-center my-4">Tous les Avis</h2>
+  <!-- Bouton pour télécharger le fichier ODF -->
+  <button class="btn btn-outline-success" (click)="downloadAsPdf()">
+    Télécharger en PDF
+  </button>
+  
+  <button class="btn btn-outline-primary" (click)="downloadAsExcel()">
+    Télécharger en Excel
+  </button>
+    <!-- Formulaire de recherche -->
+    <form (ngSubmit)="onSearch()" class="row">
+      <div class="col-md-3 mb-3">
+        <label for="keyword" class="form-label">Mot-clé</label>
+        <input type="text" class="form-control" id="keyword" [(ngModel)]="keyword" name="keyword">
+      </div>
+  
+      <div class="col-md-3 mb-3">
+        <label for="voyageId" class="form-label">ID du Voyage</label>
+        <input type="number" class="form-control" id="voyageId" [(ngModel)]="voyageId" name="voyageId">
+      </div>
+  
+      <div class="col-md-3 mb-3">
+        <label for="approuve" class="form-label">Approuvé</label>
+        <select class="form-control" id="approuve" [(ngModel)]="approuve" name="approuve">
+          <option value="null">Tous</option>
+          <option value="true">Approuvé</option>
+          <option value="false">Non Approuvé</option>
+        </select>
+      </div>
+  
+      <div class="col-md-3 mb-3">
+        <button type="submit" class="btn btn-primary w-100" style="height: 38px; line-height: 24px;">
+          Rechercher
+        </button>
+      </div>
+    </form>
+  
+    <!-- Liste des avis -->
+    <div class="avis-scroll-container mb-5">
+      <div class="avis-card" *ngFor="let avis of avisList">
+        <div class="card shadow-sm h-100 rounded-4 p-3">
+          <h5 class="card-title">
+            <i class="bi bi-person-circle me-2"></i>Utilisateur ID : {{ avis.utilisateurId }}
+          </h5>
+          <p class="card-text"><strong>Voyage ID :</strong> {{ avis.voyageId }}</p>
+          <p class="card-text">
+            <strong>Note :</strong>
+            <ng-container *ngFor="let star of [].constructor(avis.note)">
+              <i class="bi bi-star-fill text-warning"></i>
+            </ng-container>
+            <ng-container *ngFor="let star of [].constructor(5 - avis.note)">
+              <i class="bi bi-star text-muted"></i>
+            </ng-container>
+          </p>
+          <p class="card-text"><strong>Commentaire :</strong> {{ avis.commentaire }}</p>
+          <!-- Boutons Like / Dislike -->
+<div class="d-flex justify-content-start mt-3">
+  <button class="btn btn-success me-2" (click)="ajouterReaction(avis.id, true)">
+    <i class="bi bi-hand-thumbs-up"></i> Like
+  </button>
+  <button class="btn btn-danger" (click)="ajouterReaction(avis.id, false)">
+    <i class="bi bi-hand-thumbs-down"></i> Dislike
+  </button>
+</div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  

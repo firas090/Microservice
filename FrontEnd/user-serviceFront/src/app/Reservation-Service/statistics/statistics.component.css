@@ -1,0 +1,23 @@
+.card {
+    border-radius: 12px;
+    transition: 0.3s ease-in-out;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  }
+  
+  h2 {
+    font-weight: bold;
+    color: #113f67;
+  }
+  
+  .card-title {
+    font-size: 1.25rem;
+  }
+  
+  .card-text {
+    font-size: 1.1rem;
+  }
+  

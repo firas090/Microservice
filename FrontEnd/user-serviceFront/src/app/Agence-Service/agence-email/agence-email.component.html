@@ -1,0 +1,11 @@
+<div class="container mt-4">
+    <h2>Send Agencies by Email</h2>
+    <form (ngSubmit)="sendEmail()">
+      <div class="mb-3">
+        <label for="email" class="form-label">Recipient Email</label>
+        <input type="email" class="form-control" id="email" [(ngModel)]="email" name="email" required>
+      </div>
+      <button type="submit" class="btn btn-primary">Send</button>
+    </form>
+    <p class="mt-2">{{ message }}</p>
+  </div>

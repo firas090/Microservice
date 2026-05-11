@@ -1,0 +1,53 @@
+<div class="container mt-4">
+  <h2 class="text-center mb-4">📋 Liste des Réservations</h2>
+
+  <table class="table table-bordered table-hover shadow-sm rounded">
+    <thead class="table-light">
+      <tr class="text-center">
+        <th>#</th>
+        <th>Destination</th>
+        <th>Date de départ</th>
+        <th>Nombre de personnes</th>
+        <th>ID utilisateur</th>
+        <th>Options</th> <!-- ✅ Nouvelle colonne -->
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let reservation of reservations; let i = index" class="align-middle text-center">
+        <td>{{ i + 1 }}</td>
+        <td>{{ reservation.destination }}</td>
+        <td>{{ reservation.dateDepart | date:'longDate' }}</td>
+        <td>{{ reservation.nombrePersonnes }}</td>
+        <td>{{ reservation.userId }}</td>
+
+        <!-- ✅ Affichage des options -->
+        <td>
+          <span *ngIf="reservation.selectedOptions?.length > 0" class="badge bg-success">
+            ✅ {{ reservation.selectedOptions.length }} option(s)
+          </span>
+          <span *ngIf="!reservation.selectedOptions || reservation.selectedOptions.length === 0" class="badge bg-secondary">
+            🚫 Aucune
+          </span>
+        </td>
+
+        <td>
+          <div class="d-flex justify-content-center gap-2 flex-wrap">
+            <button class="btn btn-sm btn-outline-primary" (click)="download(reservation.id)">
+              🎟 Ticket
+            </button>
+            <button class="btn btn-sm btn-warning" [routerLink]="['/reservation/edit', reservation.id]">
+              ✏️ Modifier
+            </button>
+            <button class="btn btn-sm btn-info" [routerLink]="['/reservation', reservation.id, 'options']">
+              ⚙️ Options
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="deleteReservation(reservation.id)">
+              🗑 Supprimer
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,32 @@
+/* home.component.css */
+#hero {
+    margin-bottom: 30px;
+  }
+  
+  #services .card {
+    margin-bottom: 20px;
+  }
+  
+  #about {
+    background-color: #f8f9fa;
+    padding: 30px;
+  }
+  
+  #contact {
+    background-color: #e9ecef;
+  }
+  
+  #contact form {
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .card-img-top {
+    height: 200px;
+    object-fit: cover;
+  }
+  .carousel-img {
+    height: 500px;        /* ou la hauteur que tu veux */
+    object-fit: cover;    /* pour garder un bon ratio sans déformation */
+  }
+  

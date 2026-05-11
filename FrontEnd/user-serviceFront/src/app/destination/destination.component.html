@@ -1,0 +1,290 @@
+<div class="dashboard-container">
+
+  
+    <!-- Header section with search -->
+    <header class="dashboard-header">
+      <div class="search-container">
+        <div class="search-box">
+          <i class="material-icons">search</i>
+          <input type="text" [(ngModel)]="searchTerm" (keyup.enter)="searchDestinations()"
+                 placeholder="Search destinations...">
+          <button class="action-button primary" (click)="searchDestinations()">Search</button>
+        </div>
+      </div>
+    </header>
+  
+    <!-- Main content area -->
+    <div class="content-area">
+      <!-- Side panel for filters - conditionally shown -->
+      <aside class="filters-panel" [class.show]="showFilters">
+        <div class="panel-header">
+          <h3>Filters & Recommendations</h3>
+          <button class="close-btn" (click)="toggleFilters()">
+            <i class="material-icons">close</i>
+          </button>
+        </div>
+  
+        <div class="filter-section">
+          <h4>Search by Country</h4>
+          <div class="input-group">
+            <input type="text" [(ngModel)]="selectedCountry" placeholder="Enter country name">
+            <button class="action-button secondary" (click)="filterByCountry()">Filter</button>
+          </div>
+        </div>
+  
+        <div class="filter-section">
+          <h4>Price Range</h4>
+          <div class="range-slider">
+            <div class="price-inputs">
+              <div class="price-input">
+                <span class="currency">€</span>
+                <input type="number" [(ngModel)]="priceRange.min" min="0" step="100">
+              </div>
+              <span class="range-separator">to</span>
+              <div class="price-input">
+                <span class="currency">€</span>
+                <input type="number" [(ngModel)]="priceRange.max" min="0" step="100">
+              </div>
+            </div>
+            <button class="action-button secondary" (click)="filterByPriceRange()">Apply</button>
+          </div>
+        </div>
+  
+        <div class="filter-section">
+          <h4>By Category</h4>
+          <div class="input-group">
+            <select [(ngModel)]="selectedCategory">
+              <option value="">Select Category</option>
+              <option *ngFor="let cat of categoryOptions" [value]="cat">{{cat}}</option>
+            </select>
+            <button class="action-button secondary" (click)="filterByCategory()">Apply</button>
+          </div>
+        </div>
+  
+        <div class="filter-section">
+          <h4>By Climate</h4>
+          <div class="input-group">
+            <select [(ngModel)]="selectedClimate">
+              <option value="">Select Climate</option>
+              <option *ngFor="let climate of climateOptions" [value]="climate">{{climate}}</option>
+            </select>
+            <button class="action-button secondary" (click)="filterByClimate()">Apply</button>
+          </div>
+        </div>
+  
+        <div class="filter-actions">
+          <button class="action-button warning" (click)="resetFilters()">Reset All Filters</button>
+        </div>
+      </aside>
+  
+      <!-- Main content section -->
+      <main class="main-content">
+        <!-- Tabs for different views -->
+        <div class="tabs-container">
+          <div class="tabs">
+            <button class="tab" [class.active]="activeTab === 'all'" (click)="setActiveTab('all')">
+              <i class="material-icons">explore</i>
+              <span>All Destinations</span>
+            </button>
+            <button class="tab" [class.active]="activeTab === 'popular'" (click)="setActiveTab('popular')">
+              <i class="material-icons">trending_up</i>
+              <span>Recommended</span>
+            </button>
+            
+          </div>
+        </div>
+  
+        <!-- Creation form panel -->
+        <section class="panel form-panel">
+          <div class="panel-header">
+            <h2>{{ isEditing ? 'Update Destination' : 'Create New Destination' }}</h2>
+          </div>
+          <div class="panel-body">
+            <form [formGroup]="destinationForm" (submit)="isEditing ? updateDestination() : createDestination()">
+              <div class="form-grid">
+                <div class="form-group">
+                  <label>Destination Name</label>
+                  <input type="text" formControlName="name" placeholder="Enter destination name">
+                  <div class="error-message" *ngIf="destinationForm.get('name')?.invalid && destinationForm.get('name')?.touched">
+                    Name is required
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <label>Country</label>
+                  <input type="text" formControlName="country" placeholder="Enter country">
+                  <div class="error-message" *ngIf="destinationForm.get('country')?.invalid && destinationForm.get('country')?.touched">
+                    Country is required
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <label>Average Price</label>
+                  <div class="price-input">
+                    <span class="currency">€</span>
+                    <input type="number" formControlName="averagePrice" placeholder="0">
+                  </div>
+                  <div class="error-message" *ngIf="destinationForm.get('averagePrice')?.invalid && destinationForm.get('averagePrice')?.touched">
+                    Valid price is required
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <label>Category</label>
+                  <select formControlName="category">
+                    <option value="">Select Category</option>
+                    <option *ngFor="let cat of categoryOptions" [value]="cat">{{cat}}</option>
+                  </select>
+                  <div class="error-message" *ngIf="destinationForm.get('category')?.invalid && destinationForm.get('category')?.touched">
+                    Category is required
+                  </div>
+                </div>
+  
+                <div class="form-group">
+                  <label>Climate</label>
+                  <select formControlName="climate">
+                    <option value="">Select Climate</option>
+                    <option *ngFor="let climate of climateOptions" [value]="climate">{{climate}}</option>
+                  </select>
+                  <div class="error-message" *ngIf="destinationForm.get('climate')?.invalid && destinationForm.get('climate')?.touched">
+                    Climate is required
+                  </div>
+                </div>
+  
+                <div class="form-group full-width">
+                  <label>Description</label>
+                  <textarea formControlName="description" rows="3" placeholder="Enter destination description"></textarea>
+                </div>
+              </div>
+  
+              <div class="form-actions">
+                <button type="submit" class="action-button primary">
+                  <i class="material-icons">{{ isEditing ? 'update' : 'add' }}</i>
+                  {{ isEditing ? 'Update Destination' : 'Add Destination' }}
+                </button>
+  
+                <button type="button" *ngIf="isEditing" class="action-button secondary" (click)="resetForm()">
+                  <i class="material-icons">cancel</i>
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+  
+        <!-- Display section - conditional based on view mode -->
+        <ng-container *ngIf="!loading; else loadingTemplate">
+          <!-- Grid View -->
+          <div class="destination-grid" *ngIf="viewMode === 'grid'">
+            <div class="empty-state" *ngIf="getActiveDestinations().length === 0">
+              <i class="material-icons">travel_explore</i>
+              <h3>No destinations found</h3>
+              <p>Try changing your search or filter criteria</p>
+            </div>
+  
+            <div class="destination-card" *ngFor="let destination of getActiveDestinations()">
+              <div class="card-image">
+                <!-- Use a placeholder based on category -->
+                <div class="image-placeholder" [ngClass]="destination.category.toLowerCase()">
+                  <i class="material-icons">{{
+                      destination.category === 'Beach' ? 'beach_access' :
+                        destination.category === 'Mountain' ? 'landscape' :
+                          destination.category === 'City' ? 'location_city' : 'place'
+                    }}</i>
+                </div>
+              </div>
+  
+              <div class="card-content">
+                <div class="card-header">
+                  <h3>{{ destination.name }}</h3>
+                  <div class="badge">{{ destination.country }}</div>
+                </div>
+  
+                <div class="card-details">
+                  <div class="detail-item">
+                    <span class="label">Category:</span>
+                    <span class="value">{{ destination.category }}</span>
+                  </div>
+                  <div class="detail-item">
+                    <span class="label">Climate:</span>
+                    <span class="value">{{ destination.climate }}</span>
+                  </div>
+                  <div class="detail-item price">
+                    <span class="label">Price:</span>
+                    <span class="value">{{ destination.averagePrice | currency:'EUR' }}</span>
+                  </div>
+                  <p class="description">{{ destination.description || 'No description available' }}</p>
+                </div>
+  
+                <div class="card-stats" *ngIf="destination.viewCount !== undefined">
+                  <div class="stat">
+                    <i class="material-icons">visibility</i>
+                    <span>{{ destination.viewCount }} views</span>
+                  </div>
+                </div>
+  
+                <div class="card-actions">
+                  <button class="icon-button edit" (click)="selectDestination(destination)" title="Edit">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="icon-button delete" (click)="deleteDestination(destination.id!)" title="Delete">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+  
+          <!-- List View -->
+          <div class="destination-list" *ngIf="viewMode === 'list'">
+            <div class="empty-state" *ngIf="getActiveDestinations().length === 0">
+              <i class="material-icons">travel_explore</i>
+              <h3>No destinations found</h3>
+              <p>Try changing your search or filter criteria</p>
+            </div>
+  
+            <table class="modern-table" *ngIf="getActiveDestinations().length > 0">
+              <thead>
+              <tr>
+                <th>Destination</th>
+                <th>Country</th>
+                <th>Category</th>
+                <th>Climate</th>
+                <th>Price</th>
+                <th>Views</th>
+                <th>Actions</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let destination of getActiveDestinations()">
+                <td class="destination-name">{{ destination.name }}</td>
+                <td><span class="country-badge">{{ destination.country }}</span></td>
+                <td>{{ destination.category }}</td>
+                <td>{{ destination.climate }}</td>
+                <td class="price">{{ destination.averagePrice | currency:'EUR' }}</td>
+                <td>{{ destination.viewCount || 0 }}</td>
+                <td class="actions">
+                  <button class="icon-button edit" (click)="selectDestination(destination)" title="Edit">
+                    <i class="material-icons">edit</i>
+                  </button>
+                  <button class="icon-button delete" (click)="deleteDestination(destination.id!)" title="Delete">
+                    <i class="material-icons">delete</i>
+                  </button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </ng-container>
+  
+        <!-- Loading template -->
+        <ng-template #loadingTemplate>
+          <div class="loading-overlay">
+            <div class="spinner"></div>
+            <p>Loading destinations...</p>
+          </div>
+        </ng-template>
+      </main>
+    </div>
+  </div>
+  

@@ -1,0 +1,29 @@
+<div class="container mt-5" style="max-width: 600px;">
+    <h2 class="text-center mb-4">🧑‍💼 Mon Profil</h2>
+  
+    <form (ngSubmit)="updateProfile()" *ngIf="user">
+      <!-- Prénom -->
+      <div class="mb-3">
+        <label for="firstname" class="form-label">Prénom</label>
+        <input type="text" id="firstname" class="form-control" [(ngModel)]="user.firstname" name="firstname" required>
+      </div>
+  
+      <!-- Nom -->
+      <div class="mb-3">
+        <label for="lastname" class="form-label">Nom</label>
+        <input type="text" id="lastname" class="form-control" [(ngModel)]="user.lastname" name="lastname" required>
+      </div>
+  
+      <!-- Email -->
+      <div class="mb-3">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" id="email" class="form-control" [(ngModel)]="user.email" name="email" readonly>
+      </div>
+  
+      
+  
+      <!-- Bouton -->
+      <button type="submit" class="btn btn-primary w-100">💾 Mettre à jour</button>
+    </form>
+  </div>
+  

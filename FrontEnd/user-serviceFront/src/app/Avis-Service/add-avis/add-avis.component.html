@@ -1,0 +1,97 @@
+<div class="container my-5">
+  <!-- Toast Notification -->
+  <div class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 9999;">
+    <div *ngIf="showToast" class="toast show align-items-center text-white bg-success border-0" role="alert">
+      <div class="d-flex">
+        <div class="toast-body">
+          ✅ Avis ajouté avec succès !
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close" (click)="closeToast()"></button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Title: Mes Avis -->
+  <h2 class="text-center my-4">Mes Avis</h2>
+
+  <!-- Avis List -->
+  <div class="avis-scroll-container mb-5">
+    <div class="avis-card" *ngFor="let avis of avisList">
+      <div class="card shadow-sm h-100 rounded-4 p-3">
+        <h5 class="card-title">
+          <i class="bi bi-person-circle me-2"></i>Utilisateur ID : {{ avis.utilisateurId }}
+        </h5>
+        <p class="card-text"><strong>Voyage ID :</strong> {{ avis.voyageId }}</p>
+        <p class="card-text">
+          <strong>Note :</strong>
+          <ng-container *ngFor="let star of [].constructor(avis.note)">
+            <i class="bi bi-star-fill text-warning"></i>
+          </ng-container>
+          <ng-container *ngFor="let star of [].constructor(5 - avis.note)">
+            <i class="bi bi-star text-muted"></i>
+          </ng-container>
+        </p>
+        <p class="card-text"><strong>Commentaire :</strong> {{ avis.commentaire }}</p>
+        
+        <!-- Modify and Delete Buttons -->
+        <div class="d-flex justify-content-between mt-3">
+          <button *ngIf="avis.utilisateurId === authService.getCurrentUserId()" 
+                  class="btn btn-warning" (click)="editAvis(avis)">
+            Modifier
+          </button>
+          <button *ngIf="avis.utilisateurId === authService.getCurrentUserId()" 
+                  class="btn btn-danger" (click)="deleteAvis(avis.id)">
+            Supprimer
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- View All Avis Button -->
+  <div class="text-end mb-3">
+    <a routerLink="/list-all-avis" class="btn btn-outline-primary rounded-pill">
+      <i class="bi bi-list-stars me-1"></i>
+      Voir tous les avis
+    </a>
+  </div>
+
+  <!-- Form for Adding Avis -->
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <div class="card shadow-lg p-4 rounded-4 animate__animated animate__fadeInUp">
+        <h3 class="text-center mb-4 text-primary">
+          <i class="bi bi-chat-heart me-2"></i>Ajouter un Avis
+        </h3>
+        
+        <!-- Form Section -->
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="voyageId" class="form-label">ID du Voyage</label>
+            <input type="number" class="form-control rounded-pill" id="voyageId" [(ngModel)]="avis.voyageId" name="voyageId" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Note</label>
+            <div class="star-rating">
+              <i class="bi bi-star-fill" 
+                 *ngFor="let star of stars; let i = index"
+                 (click)="setRating(i + 1)" 
+                 [ngClass]="{'text-warning': i < avis.note, 'text-secondary': i >= avis.note}"
+                 style="font-size: 1.5rem; cursor: pointer;"></i>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label for="commentaire" class="form-label">Commentaire</label>
+            <textarea class="form-control rounded-4" rows="4" id="commentaire" [(ngModel)]="avis.commentaire" name="commentaire" required></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-success w-100 rounded-pill">
+            <i class="bi bi-send-fill me-1"></i>Soumettre l'avis
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+<div class="container mt-4">
+    <h2 class="text-center">Modifier la Réservation</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label class="form-label">Destination</label>
+        <input type="text" class="form-control" [(ngModel)]="reservation.destination" name="destination" required />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Date de départ</label>
+        <input type="date" class="form-control" [(ngModel)]="reservation.dateDepart" name="dateDepart" required />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Nombre de personnes</label>
+        <input type="number" class="form-control" [(ngModel)]="reservation.nombrePersonnes" name="nombrePersonnes" required />
+      </div>
+  
+      <button type="submit" class="btn btn-success">Mettre à jour</button>
+    </form>
+  </div>
+  

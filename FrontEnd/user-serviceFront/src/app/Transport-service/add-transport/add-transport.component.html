@@ -1,0 +1,65 @@
+<div class="container">
+    <h2>Ajouter un Transport</h2>
+        <form (ngSubmit)="onSubmit()">
+
+      <div class="form-group">
+        <label for="voyageId">Voyage ID</label>
+        <input type="text" id="voyageId" [(ngModel)]="transport.voyageId" name="voyageId" required class="form-control" />
+      </div>
+      
+      <div class="form-group">
+        <label for="type">Type</label>
+        <input type="text" id="type" [(ngModel)]="transport.type" name="type" required class="form-control" />
+      </div>
+      
+      <div class="form-group">
+        <label for="compagnie">Compagnie</label>
+        <input type="text" id="compagnie" [(ngModel)]="transport.compagnie" name="compagnie" required class="form-control" />
+      </div>
+      
+      <div class="form-group">
+        <label for="capacite">Capacité</label>
+        <input type="number" id="capacite" [(ngModel)]="transport.capacite" name="capacite" required class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="numero">Numéro</label>
+        <input type="text" id="numero" [(ngModel)]="transport.numero" name="numero" required class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="villeDepart">Ville de Départ</label>
+        <input type="text" id="villeDepart" [(ngModel)]="transport.villeDepart" name="villeDepart" required class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="villeArrivee">Ville d'Arrivée</label>
+        <input type="text" id="villeArrivee" [(ngModel)]="transport.villeArrivee" name="villeArrivee" required class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="dateDepart">Date de Départ</label>
+        <input type="datetime-local" id="dateDepart" [(ngModel)]="transport.dateDepart" name="dateDepart" required class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="dateArrivee">Date d'Arrivée</label>
+        <input type="datetime-local" id="dateArrivee" [(ngModel)]="transport.dateArrivee" name="dateArrivee" required class="form-control" />
+      </div>
+  
+      <div class="form-group">
+        <label for="prix">Prix</label>
+        <input type="number" id="prix" [(ngModel)]="transport.prix" name="prix" required class="form-control" />
+      </div>
+
+      <!-- Nouveau champ userId -->
+    <div class="form-group">
+        <label for="userId">User ID</label>
+        <input type="number" id="userId" [(ngModel)]="transport.userId" name="userId" required class="form-control" />
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Ajouter Transport</button>
+
+    </form>
+  </div>
+  

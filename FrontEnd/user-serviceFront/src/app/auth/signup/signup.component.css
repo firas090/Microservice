@@ -1,0 +1,53 @@
+/* Centrer le formulaire dans la page */
+.signup-container {
+    min-height: 100vh; /* Assure que la page prend toute la hauteur de l'écran */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 60px; /* Espacement avec la navbar */
+    padding-bottom: 60px; /* Espacement avec le footer */
+  }
+  
+  /* Animation d'apparition */
+  .animate__fadeInUp {
+    animation-duration: 0.8s;
+    animation-timing-function: ease-out;
+  }
+  
+  /* Shadow et arrondi pour la carte */
+  .card {
+    background-color: #ffffff;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1); /* Ombre douce */
+    border-radius: 15px; /* Arrondi plus prononcé */
+  }
+  
+  /* Style des champs de texte */
+  .form-control {
+    padding: 10px 20px; /* Espace dans les champs */
+    font-size: 16px; /* Taille de police plus grande */
+  }
+  
+  /* Style du bouton "Sign Up" */
+  .btn-success {
+    background-color: #28a745; /* Couleur du bouton */
+    border-color: #28a745;
+  }
+  
+  .btn-success:hover {
+    background-color: #218838; /* Effet au survol */
+    border-color: #1e7e34;
+  }
+  
+  /* Style des labels */
+  .form-label {
+    font-weight: 500;
+    font-size: 14px;
+  }
+  
+  /* Marges pour le titre */
+  h3 {
+    font-size: 24px;
+    font-weight: 600;
+    color: #333;
+  }
+  

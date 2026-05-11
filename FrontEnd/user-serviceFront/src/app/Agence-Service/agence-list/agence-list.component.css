@@ -1,0 +1,57 @@
+/* Center the chart container and make it smaller */
+.chart-container {
+    display: flex;
+    justify-content: center; /* Center the chart horizontally */
+    align-items: center; /* Center the chart vertically */
+    margin-top: 20px; /* Add some space above */
+    max-width: 600px; /* Reduce the max-width to make the chart more compact */
+    width: 100%; /* Ensure it takes full width up to max-width */
+    height: 250px; /* Reduce the height for a smaller chart */
+    margin-left: auto; /* Center the container */
+    margin-right: auto; /* Center the container */
+}
+
+/* Styling for the loading indicator */
+.loading-indicator {
+    text-align: center;
+    font-size: 18px;
+    color: #007bff;
+    margin-top: 50px;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #007bff;
+    border-radius: 50%;
+    width: 30px; /* Reduced the spinner size */
+    height: 30px; /* Reduced the spinner size */
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Styling for the statistics title */
+h2.text-center {
+    font-size: 1.5rem; /* Smaller font for the title */
+    margin-bottom: 15px; /* Add some space below the title */
+}
+
+/* Ensure that the table text and button sizes are consistent */
+.table th, .table td {
+    font-size: 14px; /* Make text smaller for better readability */
+}
+
+.btn-sm {
+    font-size: 12px; /* Make the buttons smaller */
+}
+
+/* Responsive design adjustments for mobile */
+@media (max-width: 768px) {
+    .chart-container {
+        max-width: 100%; /* Allow the chart to take up full width on smaller screens */
+        height: 200px; /* Further reduce the height for smaller screens */
+    }
+}

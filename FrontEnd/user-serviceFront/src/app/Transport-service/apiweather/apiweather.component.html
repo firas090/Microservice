@@ -1,0 +1,15 @@
+<div *ngIf="weatherLoading" class="loader">Chargement des données météo...</div>
+
+<div *ngIf="!weatherLoading && weather" class="container">
+  <h2>Météo à la ville de départ : {{ weather.weather[0].description }}</h2>
+  
+  <div class="weather-info">
+    <p><strong>Température:</strong> {{ weather.main.temp }}°C</p>
+    <p><strong>Humidité:</strong> {{ weather.main.humidity }}%</p>
+    <p><strong>Description:</strong> {{ weather.weather[0].description }}</p>
+  </div>
+</div>
+
+<div *ngIf="errorMessage" class="error-message">
+  <p>{{ errorMessage }}</p>
+</div>

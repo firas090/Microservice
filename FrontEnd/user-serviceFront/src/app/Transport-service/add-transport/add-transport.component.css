@@ -1,0 +1,18 @@
+/* add-transport.component.css */
+.container {
+    margin-top: 30px;
+  }
+  
+  form {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  button {
+    width: 100%;
+  }
+  

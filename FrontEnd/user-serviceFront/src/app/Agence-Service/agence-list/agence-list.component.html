@@ -1,0 +1,56 @@
+<div class="container mt-4">
+  <h2>Agency List</h2>
+  <button class="btn btn-primary mb-4" (click)="downloadAgenciesAsPdf()">Download as PDF</button>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+        <th>Email</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let agence of agences">
+        <td>{{ agence.nomAg }}</td>
+        <td>{{ agence.adresse }}</td>
+        <td>{{ agence.email }}</td>
+        <td>{{ agence.active ? 'Active' : 'Inactive' }}</td>
+        <td>
+          <button class="btn btn-primary btn-sm" [routerLink]="['/agence', agence.idAgence]">View</button>
+          <button class="btn btn-warning btn-sm" [routerLink]="['/agence/edit', agence.idAgence]">Edit</button>
+          <button class="btn btn-danger btn-sm" (click)="deleteAgence(agence.idAgence!)">Delete</button>
+          <button class="btn btn-info btn-sm" (click)="toggleStatus(agence.idAgence!, agence.active)">
+            {{ agence.active ? 'Deactivate' : 'Activate' }}
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button class="btn btn-success" [routerLink]="['/agence/add']">Add Agency</button>
+</div>
+
+<div *ngIf="statsParVille; else loadingTemplate">
+  <h2 class="mt-5 text-center">Statistiques par Ville</h2> <!-- Centered Title -->
+
+  <!-- Bar chart displaying statistics -->
+  <div class="chart-container">
+    <canvas baseChart
+            [data]="barChartData"
+            [options]="barChartOptions"
+            [type]="'bar'">
+    </canvas>
+  </div>
+
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="loading-indicator text-center">
+    <p>Loading statistics...</p> <!-- Loading Text -->
+    <div class="spinner"></div> <!-- Loading spinner -->
+  </div>
+</ng-template>
+
+<hr />

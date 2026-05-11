@@ -1,0 +1,14 @@
+.avis-scroll-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 1rem;
+    padding: 1rem;
+    scroll-snap-type: x mandatory;
+  }
+  
+  .avis-card {
+    min-width: 300px;
+    flex: 0 0 auto;
+    scroll-snap-align: start;
+  }
+  

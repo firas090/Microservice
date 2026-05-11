@@ -1,0 +1,21 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🎯 Recommandations de Destinations</h2>
+  
+    <div *ngIf="recommendations.length > 0; else noData">
+      <div class="row justify-content-center">
+        <div class="col-md-4 mb-3" *ngFor="let dest of recommendations">
+          <div class="card border-0 shadow-sm text-center">
+            <div class="card-body">
+              <h5 class="card-title text-success">{{ dest }}</h5>
+              <p class="card-text">Nous vous suggérons cette destination !</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <ng-template #noData>
+      <p class="text-muted text-center">Aucune recommandation disponible pour le moment.</p>
+    </ng-template>
+  </div>
+  

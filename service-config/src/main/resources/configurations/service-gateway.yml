@@ -1,0 +1,73 @@
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true  # Ensure service IDs are treated as lowercase
+      routes:
+        - id: agence-service
+          uri: lb://AGENCE-SERVICE  # Match the uppercase service name in Eureka
+          predicates:
+            - Path=/api/agences/**  # Match the request path
+          filters:
+            - StripPrefix=2  # Strip /api/agences, forwarding /getAll to agence-service
+        - id: transport-service
+          uri: lb://transport-service
+          predicates:
+            - Path=/api/transports/**
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**
+        - id: reservation-service
+          uri: lb://reservation-service
+          predicates:
+            - Path=/api/reservations/**
+        - id: Avis-service
+          uri: lb://Avis-service
+          predicates:
+            - Path=/api/avis/**
+        - id: destination-service
+          uri: lb://gestion-destination-service
+          predicates:
+            - Path=/api/destinations/**
+          filters:
+            - StripPrefix=2
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - PATCH
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
+  level:
+    org.springframework.cloud.gateway: DEBUG
+
+resilience4j:
+  configs:
+    default:
+      registerHealthIndicator: true
+      slidingWindowType: COUNT_BASED
+      slidingWindowSize: 10
+      failureRateThreshold: 50
+      waitDurationInOpenState: 5s
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+  timelimiter:
+    configs:
+      default:
+        timeout-duration: 3s
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    preferIpAddress: true

@@ -1,0 +1,47 @@
+<div *ngIf="loading" class="loader">Chargement...</div>
+
+<div *ngIf="!loading && transport" class="container">
+  <h2>Détails du Transport</h2>
+
+  <div>
+    <h3>Informations du transport</h3>
+    <p><strong>ID:</strong> {{ transport.id }}</p>
+    <p><strong>Voyage ID:</strong> {{ transport.voyageId }}</p>
+    <p><strong>Type:</strong> {{ transport.type }}</p>
+    <p><strong>Compagnie:</strong> {{ transport.compagnie }}</p>
+    <p><strong>Capacité:</strong> {{ transport.capacite }}</p>
+    <p><strong>Numéro:</strong> {{ transport.numero }}</p>
+    <p><strong>Ville de départ:</strong> {{ transport.villeDepart }}</p>
+    <p><strong>Ville d'arrivée:</strong> {{ transport.villeArrivee }}</p>
+    <p><strong>Date de départ:</strong> {{ transport.dateDepart | date }}</p>
+    <p><strong>Date d'arrivée:</strong> {{ transport.dateArrivee | date }}</p>
+    <p><strong>Prix:</strong> {{ transport.prix }} €</p>
+  </div>
+
+  <div class="user-info">
+    <h3>Utilisateur associé</h3>
+    <p><strong>Nom:</strong> {{ transport.user.name }}</p>
+    <p><strong>Email:</strong> {{ transport.user.email }}</p>
+    <p><strong>Numéro de téléphone:</strong> {{ transport.user.phone }}</p>
+  </div>
+
+  <!-- Ajouter un bouton pour tester l'API météo -->
+  <button (click)="getWeather(transport.id)" class="btn btn-info" [disabled]="weatherLoading">
+    {{ weatherLoading ? 'Chargement...' : 'Voir la météo' }}
+  </button>
+
+  <!-- Affichage des données météo -->
+  <div *ngIf="weather && !weatherLoading">
+    <h3>Météo à la ville de départ : {{ transport.villeDepart }}</h3>
+    <p><strong>Température:</strong> {{ weather.main.temp }}°C</p>
+    <p><strong>Humidité:</strong> {{ weather.main.humidity }}%</p>
+    <p><strong>Description:</strong> {{ weather.weather[0].description }}</p>
+  </div>
+
+  <!-- Affichage des erreurs -->
+  <div *ngIf="errorMessage" class="error-message">
+    <p>{{ errorMessage }}</p>
+  </div>
+
+  <a href="/transports" class="btn btn-secondary">Retour à la liste</a>
+</div>

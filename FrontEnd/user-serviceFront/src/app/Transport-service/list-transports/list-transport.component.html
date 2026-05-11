@@ -1,0 +1,29 @@
+<div class="container">
+    <h2>Liste des Transports</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Voyage ID</th>
+          <th>Compagnie</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let transport of transports">
+          <td>{{ transport.voyageId }}</td>
+          <td>{{ transport.compagnie }}</td>
+          <td>
+            <!-- Lien vers la page de modification -->
+            <a [routerLink]="['/edit-transport', transport.id]" class="btn btn-primary">Modifier</a>
+            
+            <!-- Bouton de suppression -->
+            <button *ngIf="transport.id" (click)="deleteTransport(transport.id)" class="btn btn-danger">Supprimer</button>
+  
+            <!-- Bouton de détails -->
+            <a [routerLink]="['/transport', transport.id]" class="btn btn-info">Détails</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

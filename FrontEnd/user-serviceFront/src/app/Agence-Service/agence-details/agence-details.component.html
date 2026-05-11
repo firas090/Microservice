@@ -1,0 +1,13 @@
+<div class="container mt-4" *ngIf="agence">
+    <h2>Agency Details</h2>
+    <p><strong>Name:</strong> {{ agence.nomAg }}</p>
+    <p><strong>Address:</strong> {{ agence.adresse }}</p>
+    <p><strong>Email:</strong> {{ agence.email }}</p>
+    <p><strong>Phone:</strong> {{ agence.telephone }}</p>
+    <p><strong>Website:</strong> {{ agence.siteWeb }}</p>
+    <p><strong>Description:</strong> {{ agence.description }}</p>
+    <p><strong>Status:</strong> {{ agence.active ? 'Active' : 'Inactive' }}</p>
+    <p><strong>Responsable ID:</strong> {{ agence.responsableId }}</p>
+    <button class="btn btn-primary" [routerLink]="['/agence/edit', agence.idAgence]">Edit</button>
+    <button class="btn btn-secondary" [routerLink]="['/agences']">Back</button>
+  </div>

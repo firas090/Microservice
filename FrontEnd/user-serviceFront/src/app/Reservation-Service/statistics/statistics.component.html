@@ -1,0 +1,24 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">📈 Statistiques des Réservations</h2>
+  
+    <div *ngIf="stats">
+      <div class="text-center mb-4">
+        <p class="fs-5"><strong>Total des réservations :</strong> {{ stats.totalReservations }}</p>
+        <p class="fs-5"><strong>Moyenne de personnes par réservation :</strong> {{ stats.averagePeoplePerReservation | number:'1.0-2' }}</p>
+      </div>
+  
+      <h4 class="mb-3">📍 Réservations par destination :</h4>
+  
+      <div class="row">
+        <div class="col-md-4 mb-3" *ngFor="let destination of stats.reservationsByDestination | keyvalue">
+          <div class="card shadow-sm border-0 h-100">
+            <div class="card-body text-center">
+              <h5 class="card-title text-primary">{{ destination.key }}</h5>
+              <p class="card-text fs-6">Nombre de réservations : <strong>{{ destination.value }}</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

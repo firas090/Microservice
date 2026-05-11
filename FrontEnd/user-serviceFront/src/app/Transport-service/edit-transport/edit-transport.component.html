@@ -1,0 +1,11 @@
+<!-- edit-transport.component.html -->
+<div class="container">
+    <h2>Modifier le Transport</h2>
+    <form (ngSubmit)="editTransport()">
+      <!-- Le même formulaire que pour l'ajout, mais avec la donnée pré-remplie -->
+      <input type="text" [(ngModel)]="transport.voyageId" name="voyageId" class="form-control" />
+      <!-- Ajoute les autres champs du formulaire avec [(ngModel)] pour la liaison bidirectionnelle -->
+      <button type="submit" class="btn btn-primary">Modifier Transport</button>
+    </form>
+  </div>
+  

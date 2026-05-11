@@ -1,0 +1,44 @@
+/* Container principal */
+.container {
+    max-width: 600px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Titre principal */
+  h2 {
+    font-size: 1.8rem;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    text-align: center;
+  }
+  
+  /* Style des informations météo */
+  .weather-info {
+    font-size: 1.1rem;
+    color: #34495e;
+    line-height: 1.6;
+  }
+  
+  .weather-info p {
+    margin: 10px 0;
+  }
+  
+  .error-message {
+    color: red;
+    font-size: 1rem;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Loader */
+  .loader {
+    text-align: center;
+    font-size: 1.5rem;
+    color: #3498db;
+  }
+  

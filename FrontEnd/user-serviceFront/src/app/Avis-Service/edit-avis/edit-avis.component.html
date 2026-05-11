@@ -1,0 +1,42 @@
+<div class="container my-5">
+    <h3 class="text-center mb-4 text-primary">Modifier un Avis</h3>
+  
+    <form [formGroup]="avisForm" (ngSubmit)="onSubmit()">
+      <div class="mb-3">
+        <label for="voyageId" class="form-label">ID du Voyage</label>
+        <input
+          type="number"
+          class="form-control"
+          id="voyageId"
+          formControlName="voyageId"
+          required
+        />
+      </div>
+  
+      <div class="mb-3">
+        <label class="form-label">Note</label>
+        <div class="star-rating">
+          <i
+            class="bi bi-star-fill"
+            *ngFor="let star of stars; let i = index"
+            (click)="setRating(i + 1)"
+            [ngClass]="{'text-warning': i < avisForm.get('note')?.value, 'text-secondary': i >= avisForm.get('note')?.value}"
+            style="font-size: 1.5rem; cursor: pointer;"
+          ></i>
+        </div>
+      </div>
+  
+      <div class="mb-3">
+        <label for="commentaire" class="form-label">Commentaire</label>
+        <textarea
+          class="form-control"
+          id="commentaire"
+          formControlName="commentaire"
+          rows="4"
+          required
+        ></textarea>
+      </div>
+  
+      <button type="submit" class="btn btn-success w-100" [disabled]="avisForm.invalid">Soumettre la modification</button>
+    </form>
+  </div>
